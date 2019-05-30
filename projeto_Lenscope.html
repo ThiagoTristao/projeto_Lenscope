@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Cadastro Lente</title>
+</head>
+<body>
+<form method="POST" action ="projeto_Lenscope.html">
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Lentes</span>
+</nav>
+<form id="formulario">
+  <div class="form-group col-md-4">
+    <label for="GrauEsfE">Grau Esferico Esquerdo</label>
+    <input type="GrauEsfE" class="form-control" id="GrauEsfE" name="GrauEsfE" placeholder="Grau Esférico esquerdo">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="GrauEsfD">Grau Esferido Direito</label>
+    <input type="GrauEsfD" class="form-control" id="GrauEsfD" name="GrauEsfD" placeholder="Grau Esférico direito">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="GrauCilE">Grau cilindrico Esquerdo</label>
+    <input type="GrauCilE" class="form-control" id="GrauCilE" name="GrauCilE" placeholder="Grau cilindrico esquerdo">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="GrauCilD">Grau cilindrico Direito</label>
+    <input type="GrauCilD" class="form-control" id="GrauCilD" name="GrauCilD" placeholder="Grau cilindrico direito">
+  </div>
+  <button type="submit" id="meu-submit" class="btn btn-primary">Salvar</button>
+  <br></br>
+</form>
+ 
+<div style="width:630px;">
+<table width="5%" class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Grau Esferico Esquerdo </th>
+      <th>Grau Esferico Direito</th>
+      <th>Grau cilindrico Esquerdo</th>
+      <th>Grau cilindrico Direito</th>
+      <th>Resultado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    </tr>
+  </tbody>
+</table>
+ 
+<script>
+  var id = 0;
+  var form = document.getElementById('formulario');
+  var GrauEsfE = document.getElementById('GrauEsfE');
+  var GrauEsfD = document.getElementById('GrauEsfD');
+  var GrauCilE = document.getElementById('GrauCilE');
+  var GrauCilD = document.getElementById('GrauCilD');
+  var corpo_tabela = document.querySelector("tbody");
+  var Resultado;
+  //so entra na funcao quando clica no botao
+  document.getElementById("meu-submit").onclick = function(e) {
+      id = id + 1;
+      var linha = document.createElement("tr");
+      var campo_id = document.createElement("td");
+      var campo_GrauEsfE = document.createElement("td");
+      var campo_GrauEsfD = document.createElement("td");
+      var campo_GrauCilE = document.createElement("td");
+      var campo_GrauCilD = document.createElement("td");      
+      var texto_id = document.createTextNode(id);
+      var texto_GrauEsfE = document.createTextNode(GrauEsfE.value);
+      var texto_GrauEsfD = document.createTextNode(GrauEsfD.value);
+      var texto_GrauCilE = document.createTextNode(GrauCilE.value);
+      var texto_GrauCilD = document.createTextNode(GrauCilD.value);      
+      campo_id.appendChild(texto_id);
+      campo_GrauEsfE.appendChild(texto_GrauEsfE);
+      campo_GrauEsfD.appendChild(texto_GrauEsfD);
+      campo_GrauCilE.appendChild(texto_GrauCilE);
+      campo_GrauCilD.appendChild(texto_GrauCilD);      
+      linha.appendChild(campo_id);
+      linha.appendChild(campo_GrauEsfE);
+      linha.appendChild(campo_GrauEsfD);
+      linha.appendChild(campo_GrauCilE);
+      linha.appendChild(campo_GrauCilD);
+      corpo_tabela.appendChild(linha);
+      if (((GrauEsfE.value <= -3 && GrauEsfE.value >= -12) && (GrauEsfD.value <= -3 && GrauEsfD.value >= -12)) && ((GrauCilD.value >= -2 && GrauCilD.value <= 0) && (GrauCilE.value >= -2 && GrauCilE.value <= 0 ))){
+    Resultado = "Lente Prime";
+  }else if (((GrauEsfE.value <= -3 && GrauEsfE.value >= -10) && (GrauEsfD.value <= -3 && GrauEsfD.value >= -10)) && ((GrauCilD.value < -2 && GrauCilD.value >= -6) && (GrauCilE.value < -2 && GrauCilE.value >= -6))){
+    Resultado = "Lente Prime com grau esférico de -3 até -10";
+  }else if (((GrauEsfE.value <= 0 && GrauEsfE.value >= -15) && (GrauEsfD.value <= 0 && GrauEsfD.value >= -15)) && ((GrauCilD.value >= -5 && GrauCilD.value <= 0) && (GrauCilE.value >= -5 && GrauCilE.value <= 0))){
+    Resultado = "Lente Vision";
+  }else{
+    Resultado = "Dados informados invalidos"
+  }
+  var campo_Resultado = document.createElement("td");
+  var texto_Resultado = document.createTextNode(Resultado);
+  campo_Resultado.appendChild(texto_Resultado);
+  linha.appendChild(campo_Resultado)
+      //codigo responsavel por impedir recarregar a tela
+      e.preventDefault();
+  };
+</script>
+</body>
+</html>
